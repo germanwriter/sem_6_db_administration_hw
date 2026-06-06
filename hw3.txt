@@ -1,0 +1,22 @@
+1. how many words a user memorized
+2. which words a user memorized
+3. whichmovies a user seen at which date
+4. words used in a movies
+5. number of words used in a movie
+6. word, meaning, sentence and defination
+7. most trend movies
+8. information about users  
+9. info about movies
+10. info about subtitles
+
+
+
+ 
+ 
+ 
+ 
+ 1. top earners in each department
+ 2. employees with department name
+ 3. numb of employees in each department
+ 4. annual salary of each department
+ 5. manager of each employee

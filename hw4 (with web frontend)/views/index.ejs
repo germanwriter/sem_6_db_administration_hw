@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seeloo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="/style.css" rel="stylesheet">
+</head>
+<body>
+    <div class="main">
+
+
+
+        <div class="left-sidebar">
+            <a class="cards profile" href="/">
+                <div><i class="fa-solid fa-table-cells-large <%= whichPage == 'profile' ? 'pressed-cards' : '' %>"></i></div>
+                <div><span>Profiles</span></div>
+            </a>
+            <a class="cards watched" href="/watched">
+                <div><i class="fa-solid fa-tv <%= whichPage == 'watched' ? 'pressed-cards' : '' %>"></i></div>
+                <div><span>Watched</span></div>
+            </a>
+            <a class="cards memorize" href="/memorize">
+                <div><i class="fa-solid fa-spell-check <%= whichPage == 'memorize' ? 'pressed-cards' : '' %>"></i></div>
+                <div><span>Memorizes</span></div>
+            </a>
+            <a class="cards movie" href="/movie">
+                <div><i class="fa-solid fa-clapperboard <%= whichPage == 'movie' ? 'pressed-cards' : '' %>"></i></div>
+                <div><span>Movies</span></div>
+            </a>
+            <a class="cards trend" href="/trend">
+                <div><i class="fa-solid fa-chart-simple <%= whichPage == 'trend' ? 'pressed-cards' : '' %>"></i></div>
+                <div><span>Trends</span></div>
+            </a>
+            <a class="cards score" href="/score">
+                <div><i class="fa-solid fa-crown <%= whichPage == 'score' ? 'pressed-cards' : '' %>"></i></div>
+                <div><span>Scores</span></div>
+            </a>
+        </div>
+
+
+        <div class="right-side">
+
+            <div class="header"><h1>Stock In</h1></div>
+
+            <div class="menu-bar">
+
+                <div class="menues dropdown">
+                    <button class="dropbtn flex angle-down">
+                        Select 
+                        <i class="fa-solid fa-angle-down"></i> </button>
+                    <div class="dropdown-content">
+                        <a href="#">Select All</a>
+                    </div>
+                </div> 
+                <div class="menues filter">
+                    <input type="text" placeholder="Search the item by name or item code"></input>
+                </div>
+                <div class="menues add">
+                    <button>Add item</button>
+                </div>
+                <div class="menues start-date flex">
+                    <button>                        Start date                       </button>
+                    <i class="fa-regular fa-calendar"></i>
+                </div>
+                <div class="menues end-date flex">
+                    <button>End Date </button>
+                    <i class="fa-regular fa-calendar"></i>
+                </div>
+                <div class="menues today flex angle-down">
+                    <button>Today </button>
+                    <i class="fa-solid fa-angle-down"></i>
+                </div>
+                <!-- <div class="menues delete flex">
+                    <button>Delete</button>
+                    <i class="fa-solid fa-trash-can"></i>
+                </div> -->
+            </div>
+
+            <div class="table">
+                <table>
+
+                    <!-- header columns == body columns -->
+                    <!-- 10 rows each page -->
+
+
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <% for (var i=0; i<header.length; i++) { %>
+                                <th><%= header[i] %></th>    
+                            <% } %>
+                            <th>Edit</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+                        <% for (var i=0; i < body.length; i++) { %>
+
+                            <tr>
+                                <td><button class="edit-btn trash"><i class="fa-solid fa-trash-can"></i></button></td>
+                                
+                                
+                                <% for (var j=0; j<body[i].length; j++) { %>  
+                                    <% if (typeof body[i][j] === 'string' && body[i][j].endsWith('.jpg')) { %>
+                                        <td><img src="<%= body[i][j] %>" alt=""></td>
+                                    <% } else { %>
+                                        <td><%= body[i][j] %></td>
+                                    <% } %>
+                                <%}%>
+
+                                
+                                <td><button class="edit-btn">✎</button></td>
+                            </tr>
+
+                        <%}%>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="footer">
+                <button class="previous" >Previous</button>
+                <button class="next">Next</button>
+            </div>
+
+
+
+        </div>
+    </div>
+    <script src="//code.jquery.com/jquery-4.0.0.min.js"></script>
+    <script src="index.js"></script>
+</body>
+</html>

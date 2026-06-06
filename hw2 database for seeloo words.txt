@@ -1,0 +1,356 @@
+pdb: seeloo_pdb
+user: emran/parwan@localhost:1521/seeloo_pdb
+cdb$root: sys/Parwan 123.
+alter pluggable database seeloo_pdb open;
+
+
+
+create table users (
+users_id int not null,
+gmail varchar(50) unique,
+profile_path varchar(200),
+how_inform varchar(15) check(how_inform in ('brochure', 'friends', 'social media', 'teacher')) not null,
+join_date date default sysdate not null,
+total_download int,
+constraint pk_users primary key (users_id),
+constraint unique_email unique (gmail)
+);
+
+
+create table movie (
+movie_id number(5) not null,
+tmdb_id number(10) not null,
+name varchar(40) not null,
+season number(5),
+episode number(5),
+ranking number(2,1),
+release_year date,
+thriller_path varchar(200),
+constraint pk_movie primary key(movie_id),
+constraint unique_tmdb unique(tmdb_id)
+);
+
+
+create table words (
+words_id number(5) not null,
+words varchar(30) not null,
+language varchar(3) not null,
+constraint pk_words primary key(words_id),
+constraint unique_words unique(words)
+);
+
+create table movie_words (
+movie_id number(5),
+words_id number(5),
+constraint FR_MOVIE foreign key (movie_id) references movie(movie_id),
+constraint FR_WORDS foreign key (words_id) references words(words_id)
+);
+
+create table subtitle (
+subtitle_id number(5) not null,
+movie_id number(5) not null,
+language varchar(3) default 'en' not null,
+path varchar(200) not null,
+constraint PK_SUBTITLE primary key(subtitle_id),
+constraint UNIQUE_SUBTITLE unique (movie_id, language),
+constraint FK_MOVIE foreign key (movie_id) references movie(movie_id) on delete cascade
+);
+
+create table memorize (
+memorize_id number(5) not null,
+user_id number(5) not null,
+movie_id number(5) not null,
+word_id number(5) not null,
+memorize_date date default sysdate not null,
+constraint FK_USER_MEMORIZE foreign key (user_id) references users(user_id),
+constraint  FK_MOVIE_MEMORIZE foreign key (movie_id) references movie(movie_id),
+constraint FK_WORD_MEMORIZE foreign key (word_id) references words(words_id),
+constraint PK_MEMORIZE primary key (memorize_id),
+constraint UNIQUE_MEMORIZE unique (user_id, movie_id, word_id)
+);
+
+CREATE table specefics (
+specific_id number(5) not null,
+word_id number(5) not null,
+translate_language varchar(3) not null,
+pronunciation varchar(30),
+constraint PK_SPECEFICS primary key (specific_id),
+constraint FK_WORDS_SPECIFICS foreign key(word_id) references words(words_id) 
+);
+
+create table sentence (
+sentence_id number(10) not null,
+specific_id number(10) not null,
+sentence varchar(100) not null,
+constraint PK_SENTENCE primary key(sentence_id),
+constraint UNIQUE_SENTENCE unique(specific_id, sentence),
+constraint FK_SENTENCE foreign key (specific_id) references specefics(specific_id)
+
+);
+
+
+create table defination (
+defination_id number(10) not null,
+specific_id number(10) not null,
+defination varchar(100) not null,
+constraint PK_DEFINATION primary key(defination_id),
+constraint UNIQUE_DEFINATION unique(specific_id, defination),
+constraint FK_DEFINATION foreign key (specific_id) references specefics(specific_id)
+);
+
+CREATE table meaning (
+meaning_id number(10) not null,
+specific_id number(10) not null,
+meaning varchar(50) not null,
+constraint PK_MEANING primary key (meaning_id),
+constraint UNIQUE_MEANING unique (specific_id, meaning),
+constraint FK_MEANING foreign key (specific_id) references specefics(specific_id)
+);
+
+
+1. USERS
+2. MOVIE
+3. WORDS
+4. MOVIE_WORDS
+
+5. MEMORIZE
+
+6. SUBTITLE
+
+7. SPECeFICS
+8. SENTENCE
+9. MEANING
+10. DEFINATION
+
+
+BEGIN
+    FOR i IN 1..100 LOOP
+        INSERT INTO users(user_id, gmail, profile_path, how_inform, total_download) VALUES (
+            i, 
+            'omran' || i || '@gmail.com', 
+            'https://path' || i || '.com', 
+            'brochure', 
+            3
+        );
+    END LOOP;
+    COMMIT;
+END;
+/
+
+BEGIN
+    FOR i IN 1..100 LOOP
+        INSERT INTO movie VALUES (
+            i,                           -- MOVIE_ID (NUMBER(5))
+            i,                           -- TMDB_ID (NUMBER(10))
+            'movie' || i,                -- NAME (VARCHAR2(40))
+            1,                           -- SEASON (NUMBER(5))
+            1,                           -- EPISODE (NUMBER(5))
+            9.9,                         -- RANKING (NUMBER(2,1)) ← Changed from 10 to 9.9
+            TO_DATE('12-apr-2000'),      -- RELEASE_YEAR (DATE)
+            'https://movie' || i         -- THRILLER_PATH (VARCHAR2(200))
+        );
+    END LOOP;
+    COMMIT;
+END;
+/
+
+begin 
+    for i in 1..100 loop
+        insert into words values (
+            i,
+            'word' || i,
+            'en'
+        );
+    end loop;
+    commit;
+end;
+/
+
+=======================================================
+begin 
+    for i in 1..30 loop
+        insert into movie_words values (
+            3,
+            i
+        );
+    end loop;
+    commit;
+end;
+/
+begin 
+    for i in 31..60 loop
+        insert into movie_words values (
+            3,
+            i
+        );
+    end loop;
+    commit;
+end;
+/
+begin 
+    for i in 61..100 loop
+        insert into movie_words values (
+            3,
+            i
+        );
+    end loop;
+    commit;
+end;
+/
+==========================================================
+
+begin 
+    for i in 1..30 loop
+        insert into memorize values (
+            i,
+            2,
+            3,
+            i,
+            to_date('21-apr-2001')
+        );
+    end loop;
+    commit;
+end;
+/
+begin 
+    for i in 31..60 loop
+        insert into memorize values (
+            i,
+            2,
+            3,
+            i,
+            to_date('21-apr-2001')
+        );
+    end loop;
+    commit;
+end;
+/
+begin 
+    for i in 61..100 loop
+        insert into memorize values (
+            i,
+            2,
+            3,
+            i,
+            to_date('21-apr-2001')
+        );
+    end loop;
+    commit;
+end;
+/
+=====================================================
+
+
+begin 
+    for i in 61..100 loop
+        insert into subtitle values (
+            i,
+            i,
+            'en',
+            'https://path'||i
+        );
+    end loop;
+    commit;
+end;
+/
+ 
+=============================================
+ 
+ begin 
+    for i in 1..100 loop
+        insert into specefics values (
+            i,
+            i,
+            'fa',
+            'wwooordi' || i
+        );
+    end loop;
+    commit;
+end;
+/
+=================================================
+
+ begin 
+    for i in 1..100 loop
+        insert into defination values (
+            i,
+            i,
+            'defination ' || i
+        );
+    end loop;
+    commit;
+end;
+/
+
+ begin 
+    for i in 1..100 loop
+        insert into sentence values (
+            i,
+            i,
+            'sentence ' || i
+        );
+    end loop;
+    commit;
+end;
+/
+ begin 
+    for i in 1..100 loop
+        insert into meaning values (
+            i,
+            i,
+            'meaning ' || i
+        );
+    end loop;
+    commit;
+end;
+/
+
+
+
+how many users in different months used my application,
+select count(user_id), trunc(join_date, 'month') from users
+group by trunc(join_date, 'month');
+
+========================= 
+how many words, each user memorized
+select u.gmail, count(w.words)
+from users u
+join memorize m on(u.user_id = m.user_id)
+join words w on(m.word_id = w.words_id)
+join movie movie on(m.movie_id = movie.movie_id)
+group by u.gmail;
+
+=========================
+how many downloads they had from first day, until today
+select  count(user_id) as "num of users" , total_download from users 
+group by total_download
+order by total_download;
+
+=========================
+how many users informed with different methods
+select count(user), how_inform
+from users
+group by(how_inform)
+order by count(user);
+
+=========================
+what are most searched  in each month
+select name, month, searches from (
+select month, movie_id, searches, row_number() over(partition by month order by searches desc) as rank  from (
+    SELECT 
+        trunc(memorize_date, 'month') AS month,
+        movie_id,
+        COUNT(memorize_id) AS searches
+    FROM memorize
+    GROUP BY memorize_date, movie_id
+)
+)
+join movie using(movie_id)
+where rank = 1
+;
+
+
+
+
+all words a user memorize
+all movies a user seen

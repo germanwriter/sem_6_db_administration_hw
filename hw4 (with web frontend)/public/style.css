@@ -1,0 +1,259 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Montserrat";
+}
+ 
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    /* background-color: blue; */
+    padding: 20px;
+}
+
+.main {
+    display: grid;
+    grid-template-columns: 7% 92%;
+    gap: 20px;
+    /* background-color: brown; */
+    width: 100%;
+}
+
+.left-sidebar {
+    /* background-color: purple; */
+    height: 95vh;
+    border: 1px solid #FFAE35;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 15px;
+}
+
+.cards i {
+    color: #FFAE35;
+    font-size: 30px;
+    padding-bottom: 5px;
+    cursor: pointer;
+}
+
+span {
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.cards {
+    height: 60px;
+    width: 60px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+        text-decoration: none;
+    color: black;
+}
+
+.right-side {
+    /* background-color: aqua; */
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px;
+}
+
+.header h1{
+    font-weight: 600;
+}
+
+.menu-bar {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 13px 0px;
+}
+
+.menues {
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+
+}
+
+.dropdown {
+    position: relative;
+}
+
+.flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    padding-right: 20px;
+}
+
+
+
+.menues button, .menues input {
+    padding: 10px 15px;
+    border: 1px solid rgba(252, 252, 252, 0);
+    background-color: white;
+    border-radius: 8px;
+    color: #CBCBCB;
+}
+
+.filter input::placeholder {
+    color: #CBCBCB;
+}
+
+.filter input:focus {
+    outline: none;
+    color: black;
+}
+
+.filter input {
+    width: 300px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    padding: 10px 0px;
+    min-width: 90px;
+    z-index: 1;
+    border: 1px solid rgba(252, 252, 252, 0);
+    background-color: white;
+    border-radius: 0 0 8px 8px;
+    color: #CBCBCB;
+    text-align: center;
+}
+
+.dropdown-content a {
+    text-decoration: none;
+    color: #CBCBCB;
+    font-size: 13.3px;
+}
+
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.add button{
+    background-color: #FFAE35;
+    color: white;
+    font-weight: 500;
+}
+
+.flex i {
+    color: #CBCBCB;
+}
+
+.delete i {
+    color: red;
+}
+
+.table {
+    overflow-x: auto;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid #CBCBCB;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    /* border-radius: 10px; */
+}
+
+thead th {
+    text-align: center;
+    border: 1px solid #CBCBCB;
+    padding: 5px;
+    font-weight: 300;
+    color: white;
+    background-color: #FFAE35;
+}
+
+tbody td {
+    text-align: center;
+    border: 1px solid #CBCBCB;
+}
+
+td button{
+    padding: 5px 12px;
+    margin: 5px 0px;
+    border: 1px solid rgba(252, 252, 252, 0);
+    background-color: white;
+    border-radius: 8px;
+    color: #CBCBCB;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.select-row {
+    cursor: pointer;
+    accent-color: #FFAE35;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+button {
+    cursor: pointer;
+}
+
+.delete button{
+    color: red;
+}
+
+.footer {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.footer button {
+    padding: 10px 15px;
+    border: 1px solid rgba(252, 252, 252, 0);
+    background-color: white;
+    border-radius: 8px;
+    color: #CBCBCB;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+    margin-right: 10px;
+}
+
+.pressed-cards {
+    font-size: 60px !important;
+}
+
+.pressed-title {
+    font-size: 15px ;
+    font-weight: 700;
+}
+
+img {
+    border-radius: 50%;
+    height: 2rem;
+    width: 2rem;
+    /* padding: 2px 2px; */
+    margin-top: 2px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.fa-trash-can {
+    color: #DC143C;
+}
+
+input {
+    border: none;
+    padding: 5px 5px;
+    width: 100%;
+    text-align: center;
+}
+
+input:focus {
+    border: none;
+    border: 0px solid white
+}
+
+
